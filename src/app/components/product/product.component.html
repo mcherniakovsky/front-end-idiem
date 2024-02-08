@@ -1,0 +1,34 @@
+<div class="boton">
+<button mat-button (click)="goBack()"><mat-icon>arrow_back_ios</mat-icon> Atrás</button>
+</div>
+<h1 class="title">Detalle: <b>{{product?.name}}</b></h1>
+<div class="container">
+<div class="informacionGeneral">
+<mat-list role="list">
+  <mat-list-item role="listitem">
+    <mat-label>ID DB: <b>{{product?.id}} </b></mat-label>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <mat-label>Categoría: <b>{{product?.category}}</b></mat-label>
+  </mat-list-item>
+  <mat-list-item role="listitem">
+    <mat-label>Código único: <b>{{product?.code}}</b></mat-label>
+  </mat-list-item>
+  <mat-list-item>
+    <mat-label>Descripción:<b> {{product?.description}}</b></mat-label>
+  </mat-list-item>
+    <mat-list-item>
+      <mat-label>Creado el:<b> {{product?.createdAt | date:'shortdate'}}</b></mat-label>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-label>Actualizado el:<b> {{product?.updatedAt | date:'shortdate'}}</b></mat-label>
+    </mat-list-item>
+    <mat-list-item>
+      <mat-label>Activo: <b>{{!product?.disabled ? 'Activo' : 'Desactivado'}}</b></mat-label>
+    </mat-list-item>
+  </mat-list>
+</div>
+<div class="image">
+  <img src={{product?.urlImage}}/>
+</div>
+

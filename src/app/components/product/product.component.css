@@ -1,0 +1,20 @@
+.container{
+  display:flex;
+  margin-top: 3%;
+}
+.informacionGeneral{
+width: 35%;
+align-items: left;
+display:grid;
+margin-left: 0;
+margin-right: auto;
+}
+.image{
+  width: 40%;
+  margin-right: 20%;
+  margin-left: auto;
+}
+.boton{
+  margin-top: -5%;
+  margin-bottom:3%;
+}

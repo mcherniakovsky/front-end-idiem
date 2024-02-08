@@ -1,0 +1,65 @@
+
+<ng-container class="content">
+  <div class="button-header">
+    <div>
+      <button mat-raised-button color="primary" class="new-left"(click)="newProduct()">Nuevo</button>
+    </div>
+  <div class="right">
+    <mat-radio-group style="padding-right: 10px;" [(ngModel)]="orden">
+      <mat-radio-button color="warn" value="-1" style="padding-right: 10px;">Des</mat-radio-button>
+      <mat-radio-button color="warn" value="1">Asc</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field class="right" style="padding-right: 10px;">
+      <mat-label>Ordenar por Columna</mat-label>
+      <mat-select [(ngModel)]="orderBy">
+        <mat-option *ngFor="let order of columnsToOrder" [value]="order.nombre">{{
+          order.trad
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button mat-raised-button color="primary" color="warn" class="right"  (click)="sortBy()">Buscar</button>
+  </div>
+  </div>
+  <table mat-table [dataSource]="dataSource" #table matSort>
+    <ng-container matColumnDef="code">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Código</th>
+      <td mat-cell *matCellDef="let row">{{row.code}}</td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+      <td mat-cell *matCellDef="let row">{{row.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="category">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Categoría</th>
+      <td mat-cell *matCellDef="let row">{{row.category}}</td>
+    </ng-container>
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Creado el</th>
+      <td mat-cell *matCellDef="let row">{{row.createdAt | date: 'dd/MM/yyyy'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="view">
+      <th mat-header-cell *matHeaderCellDef>Ver</th>
+      <td mat-cell *matCellDef="let row"><button mat-icon-button><mat-icon (click)="view(row)">visibility</mat-icon></button></td>
+    </ng-container>
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>Editar</th>
+      <td mat-cell *matCellDef="let row"><button mat-icon-button (click)="editProduct(row)" ><mat-icon>edit</mat-icon></button></td>
+    </ng-container>
+    <ng-container matColumnDef="disabled">
+      <th mat-header-cell *matHeaderCellDef>Activado</th>
+      <td mat-cell *matCellDef="let row"><mat-slide-toggle
+        class="example-margin"
+        color="warn"
+        checked={{!row.disabled}}
+        (toggleChange)="disableProduct(row)">
+        </mat-slide-toggle></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: columnsToDisplay" [ngClass]="{'make-disabled': myRowData.disabled }"></tr>
+  </table>
+  <mat-paginator #paginator (page)="pageChange($event)" [pageSizeOptions]="[15]" [length]="total" [pageSize]="15" [pageIndex]="pageIndex" showFirstLastButtons></mat-paginator>
+
+</ng-container>
+
+
+

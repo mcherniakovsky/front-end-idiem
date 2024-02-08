@@ -1,0 +1,65 @@
+<mat-dialog-content class="formDialog">
+  <h1>{{data.title}}</h1>
+  <mat-grid-list class="gridList" cols="6" rowHeight="100px" width="150px">
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-form-field>
+        <mat-label>Código Único</mat-label>
+        <input matInput [(ngModel)]="newProduct.code" required #name="ngModel" name="code"/>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput [(ngModel)]="newProduct.name" required #name="ngModel" name="name" />
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="2" class="noUrl">
+      <div class="noUrl" *ngIf="!newProduct.urlImage">
+        <mat-label style="padding-bottom: 10%;">Vista previa</mat-label>&nbsp;
+        <mat-icon class="iconPreview">visibility_off </mat-icon>&nbsp;
+        <mat-label>No hay imagen que mostrar</mat-label>&nbsp;
+      </div>
+      <div *ngIf="newProduct.urlImage">
+        <img src={{newProduct.urlImage}} width="100" height="100"/>
+      </div>
+
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-form-field>
+        <mat-label>Categoría</mat-label>
+        <mat-select [(ngModel)]="newProduct.category" >
+          <mat-option *ngFor="let category of categories" [value]="category">{{
+            category
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="1">
+      <mat-form-field>
+        <mat-label>Url Imagen</mat-label>
+        <input matInput [(ngModel)]="newProduct.urlImage" required #name="ngModel" name="name"/>
+      </mat-form-field>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="4" [rowspan]="1">
+      <mat-form-field style="width:100%">
+        <mat-label>Descripción</mat-label>
+        <textarea matInput [(ngModel)]="newProduct.description" ></textarea>
+      </mat-form-field>
+    </mat-grid-tile>
+<!--     <mat-grid-tile [colspan]="2" [rowspan]="1" *ngIf="!data.new">
+      <mat-slide-toggle
+      class="example-margin"
+      color="warn"
+      [checked]="!newProduct.disabled"
+
+      >
+    Activado?
+  </mat-slide-toggle>
+    </mat-grid-tile> -->
+  </mat-grid-list>
+</mat-dialog-content>
+<mat-dialog-actions class="botones">
+  <button mat-raised-button (click)="enviar()" type="submit" color="primary" *ngIf="data.new">Guardar</button>
+  <button mat-raised-button (click)="editar()" type="submit" color="primary" *ngIf="!data.new">Editar</button>
+  <button mat-button (click)="cancel()" color="red">Cancelar</button>
+</mat-dialog-actions>
